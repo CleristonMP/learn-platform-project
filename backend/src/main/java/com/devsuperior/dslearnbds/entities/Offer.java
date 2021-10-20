@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,7 +44,13 @@ public class Offer implements Serializable {
 	private List<Resource> resources = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "offer")
-	private Set<Topic> topics = new HashSet<>();
+	private List<Topic> topics = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "tb_students_offer",
+			joinColumns = @JoinColumn(name = "offer_id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> students = new HashSet<>();
 	
 	public Offer() {
 	}
@@ -98,6 +106,14 @@ public class Offer implements Serializable {
 
 	public List<Resource> getResources() {
 		return resources;
+	}
+
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public Set<User> getStudents() {
+		return students;
 	}
 
 	@Override

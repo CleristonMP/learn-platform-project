@@ -1,7 +1,9 @@
 package com.devsuperior.dslearnbds.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -45,7 +47,7 @@ public abstract class Lesson implements Serializable {
 	private Set<Enrollment> enrollmentsDone = new HashSet<>();
 	
 	@OneToMany(mappedBy = "lesson")
-	private Set<Deliver> deliveries = new HashSet<>();
+	private List<Deliver> deliveries = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "lesson")
 	private Set<Topic> topics = new HashSet<>();
@@ -97,8 +99,12 @@ public abstract class Lesson implements Serializable {
 		return enrollmentsDone;
 	}
 	
-	public Set<Deliver> getDeliveries() {
+	public List<Deliver> getDeliveries() {
 		return deliveries;
+	}
+
+	public Set<Topic> getTopics() {
+		return topics;
 	}
 
 	@Override

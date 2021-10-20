@@ -39,6 +39,15 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Notification> notifications = new ArrayList<>();
 	
+	@ManyToMany(mappedBy = "likes")
+	private Set<Topic> topics = new HashSet<>();
+	
+	@OneToMany(mappedBy = "author")
+	private List<Topic> authorTopics = new ArrayList<>();
+		
+	@ManyToMany(mappedBy = "students")
+	private Set<Offer> offers = new HashSet<>();
+	
 	public User() {
 	}
 
@@ -89,6 +98,18 @@ public class User implements Serializable {
 
 	public List<Notification> getNotifications() {
 		return notifications;
+	}
+
+	public Set<Topic> getTopics() {
+		return topics;
+	}
+
+	public List<Topic> getAuthorTopics() {
+		return authorTopics;
+	}
+
+	public Set<Offer> getOffers() {
+		return offers;
 	}
 
 	@Override
